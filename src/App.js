@@ -4,6 +4,7 @@ import Results from "./Results";
 import { Router } from "@reach/router";
 import Details from "./Details";
 import { Link } from "@reach/router";
+import SearchParams from "./SearchParams";
 class App extends React.Component {
   render() {
     return (
@@ -15,6 +16,7 @@ class App extends React.Component {
         <Router>
           <Results path="/" />
           <Details path="/details/:id" />
+          <SearchParams path="/search-params" />
         </Router>
       </div>
     );
