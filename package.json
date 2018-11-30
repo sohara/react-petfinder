@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "parcel build --public-url ./dist/ src/index.html",
+    "start": "npm run build && babel-node server.js",
     "format": "prettier --write \"src/**/*.{css,js,jsx,html,json}\"",
     "format:check": "prettier --list-different \"src/**/*.{css,js,jsx,html,json}\"",
     "lint": "eslint \"**/*.{js,jsx}\"",
@@ -19,6 +21,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^10.0.1",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
@@ -36,7 +39,9 @@
   "dependencies": {
     "@emotion/styled": "^10.0.0",
     "@reach/router": "^1.2.1",
+    "babel-cli": "^6.26.0",
     "emotion": "^10.0.0",
+    "express": "^4.16.4",
     "petfinder-client": "0.0.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
