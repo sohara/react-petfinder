@@ -1,16 +1,29 @@
 import React from "react";
-import pf from "petfinder-client";
+import pf, { Pet as PetType } from "petfinder-client";
 import Pet from "./Pet";
 import SearchBox from "./SearchBox";
 import { connect } from "react-redux";
+
+if (!process.env.API_KEY || !process.env.API_SECRET) {
+  throw new Error("no API keys");
+}
 
 const petfinder = pf({
   key: process.env.API_KEY,
   secret: process.env.API_SECRET
 });
 
-class Results extends React.Component {
-  constructor(props) {
+interface Props {
+  location: string;
+  animal: string;
+  breed: string;
+}
+
+interface State {
+  pets: PetType[];
+}
+class Results extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.state = {
@@ -18,11 +31,11 @@ class Results extends React.Component {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.search();
   }
 
-  search = () => {
+  public search = () => {
     petfinder.pet
       .find({
         output: "full",
@@ -42,7 +55,7 @@ class Results extends React.Component {
         }
       });
   };
-  render() {
+  public render() {
     return (
       <div className="search">
         <SearchBox search={this.search} />
@@ -70,7 +83,12 @@ class Results extends React.Component {
   }
 }
 
-const mapStateToProps = ({ location, breed, animal }) => ({
+interface ReduxState {
+  location: string;
+  breed: string;
+  animal: string;
+}
+const mapStateToProps = ({ location, breed, animal }: ReduxState) => ({
   animal,
   breed,
   location

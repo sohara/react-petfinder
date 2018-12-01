@@ -6,13 +6,16 @@ import changeAnimal from "./actionCreators/changeAnimal";
 import changeBreed from "./actionCreators/changeBreed";
 import changeLocation from "./actionCreators/changeLocation";
 
-class SearchBox extends React.Component {
-  handleFormSubmit = event => {
+interface Props {
+  search: () => void;
+}
+class SearchBox extends React.Component<Props> {
+  public handleFormSubmit = event => {
     event.preventDefault();
     this.props.search();
   };
 
-  render() {
+  public render() {
     return (
       <div className="search-params">
         <form onSubmit={this.handleFormSubmit}>
